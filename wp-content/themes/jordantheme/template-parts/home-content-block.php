@@ -1,4 +1,5 @@
-<section class="block">
+
+<section class="block home-content-block <?php if(get_sub_field('reverse_layout')){ echo "reverse";}?>">
     <div class="row">
         <?php if(get_sub_field('block_heading')) : ?>
             <div class="grid-12 column">

@@ -1,21 +1,28 @@
 <footer class="block site-footer">
          <div class="row">
             <div class="grid-3 large-grid-2 column">
-               <img alt="Company footer logo" class="footer-logo" src="<?php echo get_template_directory_uri();?>/assets/footer-logo.png">
+            <?php if(get_field('footer-logo', 'option')) : ?>
+               <img alt="Company footer logo" class="footer-logo" src="<?php the_field('footer-logo', 'option'); ?>">
+            <?php endif; ?>
             </div>
             <div class="grid-4 large-grid-6 column">
-               <ul>
-                  <li class="title">Contact us directly</li>
-                  <li class="name">Andy</li>
-                  <li><span>t:</span> <a href="tel:07880 700900">07880 700900</a></li>
-                  <li><span>e:</span> <a href="@mailto:andy@fourmime.co.uk">andy@fourmime.co.uk</a></li>
-               </ul>
-               <ul>
-                  <li class="title">&nbsp;</li>
-                  <li class="name">Ian</li>
-                  <li><span>t:</span> <a href="tel:07712 323868">07712 323868</a></li>
-                  <li><span>e:</span> <a href="@mailto:ian@fourmime.co.uk">ian@fourmime.co.uk</a></li>
-               </ul>
+
+            <?php
+            if( have_rows('contact_details','option') ):
+                ?>
+                <?php
+                    while ( have_rows('contact_details', 'option') ) : the_row();
+                        ?>
+                        <ul>
+                            <li class="title"><?php echo the_sub_field('title', 'option'); ?>&nbsp;</li>
+                            <li class="name"><?php echo the_sub_field('name', 'option'); ?></li>
+                            <li><span>t:</span> <a href="tel:<?php echo the_sub_field('telephone_number', 'option'); ?>"><?php echo the_sub_field('telephone_number', 'option'); ?></a></li>
+                            <li><span>e:</span> <a href="@mailto:<?php echo the_sub_field('email_address', 'option'); ?>"><?php echo the_sub_field('email_address', 'option'); ?></a></li>
+                        </ul>
+                        <?php
+                    endwhile;
+            endif;
+            ?>
             </div>
             <div class="grid-5 large-grid-4 column">
                 <div class="newsletter-wrap">
@@ -25,16 +32,22 @@
                     </form>
                 </div>
                <ul class="social-links">
-                  <li><img alt="linkedin profile" src="<?php echo get_template_directory_uri();?>/assets/linkedin.png"></li>
-                  <li><img alt="facebook" src="<?php echo get_template_directory_uri();?>/assets/facebook.png"></li>
-                  <li><img alt="twitter" src="<?php echo get_template_directory_uri();?>/assets/twitter.png"></li>
+               <?php
+                  if( have_rows('social_icons','option') ):
+                    while ( have_rows('social_icons', 'option') ) : the_row();
+                        ?>
+                         <li><img src="<?php echo the_sub_field('icon'); ?>"></li>
+                <?php
+                    endwhile;
+                endif;
+                ?> 
                </ul>
             </div>
          </div>
          <div class="row">
             <div class="grid-12 column">
                <p class="copyright">
-                  Copyright 2017 Four Mime Ltd 2017. Web Design & Development by Fifteen.
+                    <?php echo the_field('copyright', 'option'); ?>
                </p>
             </div>
          </div>

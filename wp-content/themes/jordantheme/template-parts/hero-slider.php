@@ -1,6 +1,6 @@
 <!-- Top Hero Section-->
 
-<?php $bg_image = get_sub_field('background_image')[sizes][large]; ?>
+<?php $bg_image = get_sub_field('background_image')['sizes']['large']; ?>
 
 <section class="hero" style="<?php if($bg_image){ echo "background-image:url(" .$bg_image. ")"; } ?>">
     <div class="row">
